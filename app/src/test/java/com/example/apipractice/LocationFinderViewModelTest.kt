@@ -9,8 +9,8 @@ class LocationFinderViewModelTest {
     val subject = LocationFinderViewModel()
 
     @Test
-    fun `WHEN location code query is submitted THEN value returned`() {
-        val expectedResult = "123"
+    fun `WHEN location code query is submitted THEN list of values returned`() {
+        val expectedResult = listOf("123","456","789")
         assertEquals(subject.getLocationCode(), expectedResult)
     }
 }

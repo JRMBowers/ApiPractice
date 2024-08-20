@@ -1,5 +1,5 @@
 package com.example.apipractice.viewModel
 
 class LocationFinderViewModel {
-    fun getLocationCode() = "123"
+    fun getLocationCode() = listOf("123","456","789")
 }
