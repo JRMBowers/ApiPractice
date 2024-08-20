@@ -56,9 +56,9 @@ private fun LocationFinderContent(
         TextField(
             modifier = Modifier.padding(top = 16.dp),
             value = textInput.value,
-            onValueChange = { textInput.value = it },
+            onValueChange = { textInput.value = it.filter { it.isLetterOrDigit() } },
             placeholder = { if (shouldShowPlaceholderText.value) Text(text = placeHolder) })
-        Button(onClick = { onFindLocation.invoke(textInput.value) } , modifier = Modifier.padding(top = 16.dp)) {
+        Button(enabled = textInput.value.isNotEmpty(), onClick = { onFindLocation.invoke(textInput.value) } , modifier = Modifier.padding(top = 16.dp)) {
             Text(text = stringResource(id = R.string.find_location))
         }
         LazyColumn(Modifier.padding(bottom = 36.dp)) {
