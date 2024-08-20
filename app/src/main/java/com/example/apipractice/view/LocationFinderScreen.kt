@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apipractice.R
 import com.example.apipractice.viewModel.LocationFinderViewModel
+import kotlin.reflect.KFunction1
 
 @Composable
 @Preview
@@ -41,7 +42,7 @@ private fun LocationFinderContent(
     textInput: MutableState<String>,
     shouldShowPlaceholderText: State<Boolean>,
     placeHolder: String,
-    onFindLocation: () -> Unit,
+    onFindLocation: (String) -> Unit,
     searchResultState: State<List<String>>
 ) {
     Column(
@@ -57,7 +58,7 @@ private fun LocationFinderContent(
             value = textInput.value,
             onValueChange = { textInput.value = it },
             placeholder = { if (shouldShowPlaceholderText.value) Text(text = placeHolder) })
-        Button(onClick = onFindLocation , modifier = Modifier.padding(top = 16.dp)) {
+        Button(onClick = { onFindLocation.invoke(textInput.value) } , modifier = Modifier.padding(top = 16.dp)) {
             Text(text = stringResource(id = R.string.find_location))
         }
         LazyColumn(Modifier.padding(bottom = 36.dp)) {

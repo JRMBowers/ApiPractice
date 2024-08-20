@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class LocationFinderViewModel {
     val currentSearchResult: MutableStateFlow<List<String>> = MutableStateFlow(mutableStateListOf())
-    fun submitSearch() {
-        currentSearchResult.value = mutableListOf("123", "456", "789")
+    fun submitSearch(locationCode: String) {
+        currentSearchResult.value = mutableListOf(locationCode, "456", "789")
     }
 }
