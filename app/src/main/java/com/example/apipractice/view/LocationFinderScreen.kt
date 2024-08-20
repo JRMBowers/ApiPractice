@@ -13,6 +13,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,12 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apipractice.R
 import com.example.apipractice.viewModel.LocationFinderViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 @Preview
 fun LocationFinderScreen(viewModel: LocationFinderViewModel = LocationFinderViewModel()) {
-    val searchResultState = viewModel.currentSearchResult
+    val searchResultState = viewModel.currentSearchResult.collectAsState()
     val textInput = remember { mutableStateOf("") }
     val shouldShowPlaceholderText = remember { derivedStateOf { textInput.value.isEmpty() } }
     val placeHolder = stringResource(id = R.string.input_location_code)
@@ -42,7 +42,7 @@ private fun LocationFinderContent(
     shouldShowPlaceholderText: State<Boolean>,
     placeHolder: String,
     onFindLocation: () -> Unit,
-    searchResultState: MutableStateFlow<List<String>>
+    searchResultState: State<List<String>>
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
